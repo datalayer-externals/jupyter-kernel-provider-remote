@@ -853,8 +853,7 @@ class RemoteKernelLifecycleManager(with_metaclass(abc.ABCMeta, BaseKernelLifecyc
                 await get_response()
                 ready_to_connect = True
             except Exception as e:
-                print('------')
-                print(e)
+                self.log.error(e, exc_info=True)
                 if type(e) is timeout:
                     self.log.debug("Waiting for KernelID '{}' to send connection info from host '{}' - retrying..."
                                    .format(self.kernel_id, self.assigned_host))
